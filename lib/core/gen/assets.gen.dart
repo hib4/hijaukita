@@ -36,10 +36,28 @@ class $AssetsIconsGen {
   List<SvgGenImage> get values => [arrow, bell, coin, discover, eye, eyeHide];
 }
 
+class $AssetsImagesGen {
+  const $AssetsImagesGen();
+
+  /// File path: assets/images/bird_bottle.svg
+  SvgGenImage get birdBottle =>
+      const SvgGenImage('assets/images/bird_bottle.svg');
+
+  /// File path: assets/images/earth.svg
+  SvgGenImage get earth => const SvgGenImage('assets/images/earth.svg');
+
+  /// File path: assets/images/globe.svg
+  SvgGenImage get globe => const SvgGenImage('assets/images/globe.svg');
+
+  /// List of all assets
+  List<SvgGenImage> get values => [birdBottle, earth, globe];
+}
+
 class Assets {
   Assets._();
 
   static const $AssetsIconsGen icons = $AssetsIconsGen();
+  static const $AssetsImagesGen images = $AssetsImagesGen();
 }
 
 class AssetGenImage {
