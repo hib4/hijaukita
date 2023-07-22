@@ -20,6 +20,12 @@ import 'features/chat/presentation/bloc/chat_bloc.dart';
 import 'features/home/data/data_sources/remote/home_remote_data_source.dart';
 import 'features/home/data/repositories/home_repository.dart';
 import 'features/home/presentation/bloc/home_bloc.dart';
+import 'features/quiz/data/data_sources/remote/quiz_detail_activity_data_source.dart';
+import 'features/quiz/data/data_sources/remote/quiz_main_activity.dart';
+import 'features/quiz/data/repositories/quiz_detail_activity_respository.dart';
+import 'features/quiz/data/repositories/quiz_main_activity.dart';
+import 'features/quiz/presentation/bloc/detail_quiz_activity/quiz_bloc.dart';
+import 'features/quiz/presentation/bloc/main_quiz/main_quiz_bloc.dart';
 
 final sl = GetIt.I;
 
@@ -32,6 +38,9 @@ Future<void> initializeServiceLocator() async {
 
   /// Feature - Chat
   _initializeChatFeature();
+
+  /// Feature - Activity
+  _initializeActivityFeature();
 
   /// Core
   sl.registerLazySingleton<NetworkInfo>(
@@ -163,6 +172,51 @@ void _initializeChatFeature() {
   sl.registerLazySingleton<ChatRepository>(
     () => ChatRepositoryImpl(
       remoteDataSource: sl(),
+      networkInfo: sl(),
+    ),
+  );
+}
+
+void _initializeActivityFeature() {
+  // bloc
+  sl.registerFactory(
+        () => QuizBloc(
+      repository: sl(),
+    ),
+  );
+
+  sl.registerFactory(
+        () => QuizMainBloc(
+      repository: sl(),
+    ),
+  );
+
+  // data sources
+  sl.registerLazySingleton<QuizDetailActivityRemoteDataSource>(
+        () => QuizDetailActivityRemoteDataSourceImpl(
+      client: sl(),
+    ),
+  );
+
+  sl.registerLazySingleton<QuizMainRemoteDataSource>(
+        () => QuizMainRemoteDataSourceImpl(
+      client: sl(),
+    ),
+  );
+
+  // repository
+  sl.registerLazySingleton<QuizDetailActivityRepository>(
+        () => QuizDetailActivityRepositoryImpl(
+      remoteDataSource: sl(),
+      localStorage: sl(),
+      networkInfo: sl(),
+    ),
+  );
+
+  sl.registerLazySingleton<QuizMainRepository>(
+        () => QuizMainRepositoryImpl(
+      remoteDataSource: sl(),
+      localStorage: sl(),
       networkInfo: sl(),
     ),
   );
