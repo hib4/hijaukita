@@ -7,6 +7,7 @@ import 'package:google_sign_in/google_sign_in.dart';
 import 'package:hijaukita/core/route/navigator.dart';
 import 'package:hijaukita/core/theme/color_values.dart';
 import 'package:hijaukita/core/util/validator/input_validator.dart';
+import 'package:hijaukita/core/widgets/bottom_navigation/bottom_navigation.dart';
 import 'package:hijaukita/core/widgets/snackbar/snackbar_item.dart';
 import 'package:hijaukita/core/widgets/text_form_field/custom_text_form_field.dart';
 import 'package:hijaukita/features/home/presentation/pages/home_page.dart';
@@ -88,7 +89,7 @@ class _LoginPageState extends State<LoginPage> {
                 BlocConsumer<LoginBloc, LoginState>(
                   listener: (context, state) {
                     if (state is LoginSuccess) {
-                      navigatorPushAndRemove(context, const HomePage());
+                      navigatorPushAndRemove(context, const BottomNavigation());
                     } else if (state is LoginFailure) {
                       showSnackBar(context, title: state.message);
                     }
