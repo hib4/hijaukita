@@ -1,5 +1,5 @@
 class Api {
-  static String get url => 'https://hackathon.unisains.com/api';
+  static String get url => 'https://hijaukita-rest-api.unisains.com/api';
 
   static Map<String, String> headers() {
     return {

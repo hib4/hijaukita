@@ -23,6 +23,15 @@ import 'features/home/presentation/bloc/home_bloc.dart';
 import 'features/leardboard/data/data_sources/remote/leaderboard_remote_data_source.dart';
 import 'features/leardboard/data/repositories/leaderboard_repository.dart';
 import 'features/leardboard/presentation/bloc/leaderboard_bloc.dart';
+import 'features/profile/data/data_sources/remote/profile_remote_data_source.dart';
+import 'features/profile/data/repositories/profile_repository.dart';
+import 'features/profile/presentation/bloc/profile_bloc.dart';
+import 'features/quiz/data/data_sources/remote/quiz_detail_activity_data_source.dart';
+import 'features/quiz/data/data_sources/remote/quiz_main_activity.dart';
+import 'features/quiz/data/repositories/quiz_detail_activity_respository.dart';
+import 'features/quiz/data/repositories/quiz_main_activity.dart';
+import 'features/quiz/presentation/bloc/detail_quiz_activity/quiz_bloc.dart';
+import 'features/quiz/presentation/bloc/main_quiz/main_quiz_bloc.dart';
 
 final sl = GetIt.I;
 
@@ -36,8 +45,13 @@ Future<void> initializeServiceLocator() async {
   /// Feature - Chat
   _initializeChatFeature();
 
-  /// Feature - Leaderboard
   _initializeLeaderboardFeature();
+
+  /// Feature - Profile
+  _initializeProfileFeature();
+
+  /// Feature - Activity
+  _initializeActivityFeature();
 
   /// Core
   sl.registerLazySingleton<NetworkInfo>(
@@ -178,6 +192,26 @@ void _initializeLeaderboardFeature(){
   // bloc
   sl.registerFactory(
         () => LeaderboardBloc(
+
+void _initializeProfileFeature() {
+  // bloc
+  sl.registerFactory(
+    () => ProfileBloc(
+      repository: sl(),
+    ),
+  );
+}
+
+void _initializeActivityFeature() {
+  // bloc
+  sl.registerFactory(
+    () => QuizBloc(
+      repository: sl(),
+    ),
+  );
+
+  sl.registerFactory(
+    () => QuizMainBloc(
       repository: sl(),
     ),
   );
@@ -185,6 +219,20 @@ void _initializeLeaderboardFeature(){
   // data sources
   sl.registerLazySingleton<LeaderboardRemoteDataSource>(
         () => LeaderboardRemoteDataSourceImpl(
+  sl.registerLazySingleton<ProfileRemoteDataSource>(
+    () => ProfileRemoteDataSourceImpl(
+      client: sl(),
+    ),
+  );
+
+  sl.registerLazySingleton<QuizDetailActivityRemoteDataSource>(
+    () => QuizDetailActivityRemoteDataSourceImpl(
+      client: sl(),
+    ),
+  );
+
+  sl.registerLazySingleton<QuizMainRemoteDataSource>(
+    () => QuizMainRemoteDataSourceImpl(
       client: sl(),
     ),
   );
@@ -192,10 +240,27 @@ void _initializeLeaderboardFeature(){
   // repository
   sl.registerLazySingleton<LeaderboardRepository>(
         () => LeaderboardRepositoryImpl(
+  sl.registerLazySingleton<ProfileRepository>(
+    () => ProfileRepositoryImpl(
+      localStorage: sl(),
+      remoteDataSource: sl(),
+      networkInfo: sl(),
+    ),
+  );
+
+  sl.registerLazySingleton<QuizDetailActivityRepository>(
+    () => QuizDetailActivityRepositoryImpl(
       remoteDataSource: sl(),
       localStorage: sl(),
       networkInfo: sl(),
     ),
   );
 
+  sl.registerLazySingleton<QuizMainRepository>(
+    () => QuizMainRepositoryImpl(
+      remoteDataSource: sl(),
+      localStorage: sl(),
+      networkInfo: sl(),
+    ),
+  );
 }
