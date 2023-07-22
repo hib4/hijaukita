@@ -14,6 +14,9 @@ import 'features/auth/data/repositories/register_repository.dart';
 import 'features/auth/presentation/bloc/login/login_bloc.dart';
 import 'features/auth/presentation/bloc/otp/otp_bloc.dart';
 import 'features/auth/presentation/bloc/register/register_bloc.dart';
+import 'features/chat/data/data_sources/remote/chat_remote_data_source.dart';
+import 'features/chat/data/repositories/chat_repository.dart';
+import 'features/chat/presentation/bloc/chat_bloc.dart';
 import 'features/home/data/data_sources/remote/home_remote_data_source.dart';
 import 'features/home/data/repositories/home_repository.dart';
 import 'features/home/presentation/bloc/home_bloc.dart';
@@ -26,6 +29,9 @@ Future<void> initializeServiceLocator() async {
 
   /// Feature - Home
   _initializeHomeFeature();
+
+  /// Feature - Chat
+  _initializeChatFeature();
 
   /// Core
   sl.registerLazySingleton<NetworkInfo>(
@@ -133,6 +139,30 @@ void _initializeHomeFeature() {
     () => HomeRepositoryImpl(
       remoteDataSource: sl(),
       localStorage: sl(),
+      networkInfo: sl(),
+    ),
+  );
+}
+
+void _initializeChatFeature() {
+  // bloc
+  sl.registerFactory(
+    () => ChatBloc(
+      repository: sl(),
+    ),
+  );
+
+  // data sources
+  sl.registerLazySingleton<ChatRemoteDataSource>(
+    () => ChatRemoteDataSourceImpl(
+      client: sl(),
+    ),
+  );
+
+  // repository
+  sl.registerLazySingleton<ChatRepository>(
+    () => ChatRepositoryImpl(
+      remoteDataSource: sl(),
       networkInfo: sl(),
     ),
   );

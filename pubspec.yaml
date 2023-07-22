@@ -53,6 +53,7 @@ dependencies:
   pinput: ^2.2.31
   shimmer: ^3.0.0
   cached_network_image: ^3.2.3
+  lottie: ^2.4.0
 
 dev_dependencies:
   flutter_test:
@@ -82,6 +83,7 @@ flutter:
   assets:
     - assets/icons/
     - assets/images/
+    - assets/lottie/
     - assets/window/
 
   # An image asset can refer to one or more resolution-specific "variants", see
