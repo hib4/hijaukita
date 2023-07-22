@@ -128,6 +128,20 @@ class $AssetsLottieGen {
   List<LottieGenImage> get values => [typing];
 }
 
+class $AssetsTfliteGen {
+  const $AssetsTfliteGen();
+
+  /// File path: assets/tflite/model.tflite
+  String get model => 'assets/tflite/model.tflite';
+
+  /// File path: assets/tflite/model_unquant_metadata.tflite
+  String get modelUnquantMetadata =>
+      'assets/tflite/model_unquant_metadata.tflite';
+
+  /// List of all assets
+  List<String> get values => [model, modelUnquantMetadata];
+}
+
 class $AssetsWindowGen {
   const $AssetsWindowGen();
 
@@ -166,6 +180,7 @@ class Assets {
   static const $AssetsIconsGen icons = $AssetsIconsGen();
   static const $AssetsImagesGen images = $AssetsImagesGen();
   static const $AssetsLottieGen lottie = $AssetsLottieGen();
+  static const $AssetsTfliteGen tflite = $AssetsTfliteGen();
   static const $AssetsWindowGen window = $AssetsWindowGen();
 }
 

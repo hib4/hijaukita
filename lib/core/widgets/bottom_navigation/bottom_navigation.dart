@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:hijaukita/features/leardboard/presentation/pages/leaderboard.dart';
 
 import '../../../features/home/presentation/pages/home_page.dart';
 import '../../../features/profile/presentation/pages/profile_page.dart';
@@ -19,7 +20,7 @@ class _BottomNavigationState extends State<BottomNavigation> {
   final _tabs = [
     const HomePage(),
     const SizedBox(),
-    const SizedBox(),
+    const LeaderboardPage(),
     const ProfilePage(),
   ];
 
