@@ -44,7 +44,7 @@ Future<void> initializeServiceLocator() async {
 
   /// Feature - Profile
   _initializeProfileFeature();
-  
+
   /// Feature - Activity
   _initializeActivityFeature();
 
@@ -187,17 +187,21 @@ void _initializeProfileFeature() {
   // bloc
   sl.registerFactory(
     () => ProfileBloc(
-      
+      repository: sl(),
+    ),
+  );
+}
+
 void _initializeActivityFeature() {
   // bloc
   sl.registerFactory(
-        () => QuizBloc(
+    () => QuizBloc(
       repository: sl(),
     ),
   );
 
   sl.registerFactory(
-        () => QuizMainBloc(
+    () => QuizMainBloc(
       repository: sl(),
     ),
   );
@@ -205,15 +209,18 @@ void _initializeActivityFeature() {
   // data sources
   sl.registerLazySingleton<ProfileRemoteDataSource>(
     () => ProfileRemoteDataSourceImpl(
+      client: sl(),
+    ),
+  );
 
   sl.registerLazySingleton<QuizDetailActivityRemoteDataSource>(
-        () => QuizDetailActivityRemoteDataSourceImpl(
+    () => QuizDetailActivityRemoteDataSourceImpl(
       client: sl(),
     ),
   );
 
   sl.registerLazySingleton<QuizMainRemoteDataSource>(
-        () => QuizMainRemoteDataSourceImpl(
+    () => QuizMainRemoteDataSourceImpl(
       client: sl(),
     ),
   );
@@ -221,9 +228,14 @@ void _initializeActivityFeature() {
   // repository
   sl.registerLazySingleton<ProfileRepository>(
     () => ProfileRepositoryImpl(
+      localStorage: sl(),
+      remoteDataSource: sl(),
+      networkInfo: sl(),
+    ),
+  );
 
   sl.registerLazySingleton<QuizDetailActivityRepository>(
-        () => QuizDetailActivityRepositoryImpl(
+    () => QuizDetailActivityRepositoryImpl(
       remoteDataSource: sl(),
       localStorage: sl(),
       networkInfo: sl(),
@@ -231,7 +243,7 @@ void _initializeActivityFeature() {
   );
 
   sl.registerLazySingleton<QuizMainRepository>(
-        () => QuizMainRepositoryImpl(
+    () => QuizMainRepositoryImpl(
       remoteDataSource: sl(),
       localStorage: sl(),
       networkInfo: sl(),
