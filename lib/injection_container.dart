@@ -6,6 +6,21 @@ import 'package:http/http.dart' as http;
 
 import 'core/util/local/local_storage.dart';
 import 'core/util/network/network_info.dart';
+import 'features/activity/data/data_sources/remote/activity_remote_data_source.dart';
+import 'features/activity/data/data_sources/remote/event_remote_data_source.dart';
+import 'features/activity/data/data_sources/remote/redeem_code_remote_data_source.dart';
+import 'features/activity/data/data_sources/remote/upload_photo_remote_data_source.dart';
+import 'features/activity/data/data_sources/remote/wishlist_remote_data_source.dart';
+import 'features/activity/data/repositories/activity_repository.dart';
+import 'features/activity/data/repositories/event_repository.dart';
+import 'features/activity/data/repositories/redeem_code_repository.dart';
+import 'features/activity/data/repositories/upload_photo_repository.dart';
+import 'features/activity/data/repositories/wishlist_repository.dart';
+import 'features/activity/presentation/bloc/activity/activity_bloc.dart';
+import 'features/activity/presentation/bloc/event/event_bloc.dart';
+import 'features/activity/presentation/bloc/redeem_code/redeem_code_bloc.dart';
+import 'features/activity/presentation/bloc/upload_photo/upload_photo_bloc.dart';
+import 'features/activity/presentation/bloc/wishlist/wishlist_bloc.dart';
 import 'features/auth/data/data_sources/remote/login_remote_data_source.dart';
 import 'features/auth/data/data_sources/remote/otp_remote_data_source.dart';
 import 'features/auth/data/data_sources/remote/register_remote_data_source.dart';
@@ -97,7 +112,7 @@ void _initializeAuthenticationFeature() {
   );
 
   sl.registerFactory(
-        () => LogoutBloc(
+    () => LogoutBloc(
       repository: sl(),
     ),
   );
@@ -147,7 +162,7 @@ void _initializeAuthenticationFeature() {
   );
 
   sl.registerLazySingleton<LogoutRepository>(
-        () => LogoutRepositoryImpl(
+    () => LogoutRepositoryImpl(
       localStorage: sl(),
       networkInfo: sl(),
     ),
@@ -203,16 +218,50 @@ void _initializeChatFeature() {
   );
 }
 
-void _initializeLeaderboardFeature(){
+void _initializeLeaderboardFeature() {
   // bloc
   sl.registerFactory(
-        () => LeaderboardBloc(
+    () => LeaderboardBloc(
+      repository: sl(),
+    ),
+  );
+
+  sl.registerLazySingleton<LeaderboardRemoteDataSource>(
+    () => LeaderboardRemoteDataSourceImpl(
+      client: sl(),
+    ),
+  );
+
+  sl.registerLazySingleton<LeaderboardRepository>(
+    () => LeaderboardRepositoryImpl(
+      remoteDataSource: sl(),
+      networkInfo: sl(),
+      localStorage: sl(),
+    ),
+  );
+}
 
 void _initializeProfileFeature() {
   // bloc
   sl.registerFactory(
     () => ProfileBloc(
       repository: sl(),
+    ),
+  );
+
+  // data sources
+  sl.registerLazySingleton<ProfileRemoteDataSource>(
+    () => ProfileRemoteDataSourceImpl(
+      client: sl(),
+    ),
+  );
+
+  // repository
+  sl.registerLazySingleton<ProfileRepository>(
+    () => ProfileRepositoryImpl(
+      remoteDataSource: sl(),
+      networkInfo: sl(),
+      localStorage: sl(),
     ),
   );
 }
@@ -231,15 +280,37 @@ void _initializeActivityFeature() {
     ),
   );
 
-  // data sources
-  sl.registerLazySingleton<LeaderboardRemoteDataSource>(
-        () => LeaderboardRemoteDataSourceImpl(
-  sl.registerLazySingleton<ProfileRemoteDataSource>(
-    () => ProfileRemoteDataSourceImpl(
-      client: sl(),
+  sl.registerFactory(
+    () => ActivityBloc(
+      repository: sl(),
     ),
   );
 
+  sl.registerFactory(
+    () => WishlistBloc(
+      repository: sl(),
+    ),
+  );
+
+  sl.registerFactory(
+    () => UploadPhotoBloc(
+      repository: sl(),
+    ),
+  );
+
+  sl.registerFactory(
+    () => EventBloc(
+      repository: sl(),
+    ),
+  );
+
+  sl.registerFactory(
+    () => RedeemCodeBloc(
+      repository: sl(),
+    ),
+  );
+
+  // data sources
   sl.registerLazySingleton<QuizDetailActivityRemoteDataSource>(
     () => QuizDetailActivityRemoteDataSourceImpl(
       client: sl(),
@@ -252,17 +323,35 @@ void _initializeActivityFeature() {
     ),
   );
 
-  // repository
-  sl.registerLazySingleton<LeaderboardRepository>(
-        () => LeaderboardRepositoryImpl(
-  sl.registerLazySingleton<ProfileRepository>(
-    () => ProfileRepositoryImpl(
-      localStorage: sl(),
-      remoteDataSource: sl(),
-      networkInfo: sl(),
+  sl.registerLazySingleton<ActivityRemoteDataSource>(
+    () => ActivityRemoteDataSourceImpl(
+      client: sl(),
     ),
   );
 
+  sl.registerLazySingleton<WishlistRemoteDataSource>(
+    () => WishlistRemoteDataSourceImpl(
+      client: sl(),
+    ),
+  );
+
+  sl.registerLazySingleton<UploadPhotoRemoteDataSource>(
+    () => UploadPhotoRemoteDataSourceImpl(),
+  );
+
+  sl.registerLazySingleton<EventRemoteDataSource>(
+    () => EventRemoteDataSourceImpl(
+      client: sl(),
+    ),
+  );
+
+  sl.registerLazySingleton<RedeemCodeRemoteDataSource>(
+    () => RedeemCodeRemoteDataSourceImpl(
+      client: sl(),
+    ),
+  );
+
+  // repository
   sl.registerLazySingleton<QuizDetailActivityRepository>(
     () => QuizDetailActivityRepositoryImpl(
       remoteDataSource: sl(),
@@ -273,6 +362,46 @@ void _initializeActivityFeature() {
 
   sl.registerLazySingleton<QuizMainRepository>(
     () => QuizMainRepositoryImpl(
+      remoteDataSource: sl(),
+      localStorage: sl(),
+      networkInfo: sl(),
+    ),
+  );
+
+  sl.registerLazySingleton<ActivityRepository>(
+    () => ActivityRepositoryImpl(
+      remoteDataSource: sl(),
+      localStorage: sl(),
+      networkInfo: sl(),
+    ),
+  );
+
+  sl.registerLazySingleton<WishlistRepository>(
+    () => WishlistRepositoryImpl(
+      remoteDataSource: sl(),
+      localStorage: sl(),
+      networkInfo: sl(),
+    ),
+  );
+
+  sl.registerLazySingleton<UploadPhotoRepository>(
+    () => UploadPhotoRepositoryImpl(
+      remoteDataSource: sl(),
+      localStorage: sl(),
+      networkInfo: sl(),
+    ),
+  );
+
+  sl.registerLazySingleton<EventRepository>(
+    () => EventRepositoryImpl(
+      remoteDataSource: sl(),
+      localStorage: sl(),
+      networkInfo: sl(),
+    ),
+  );
+
+  sl.registerLazySingleton<RedeemCodeRepository>(
+    () => RedeemCodeRepositoryImpl(
       remoteDataSource: sl(),
       localStorage: sl(),
       networkInfo: sl(),

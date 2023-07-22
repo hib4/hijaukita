@@ -55,6 +55,10 @@ dependencies:
   cached_network_image: ^3.2.3
   lottie: ^2.4.0
   youtube_player_flutter: ^8.1.2
+  image_picker: ^1.0.0
+  google_ml_kit: ^0.16.1
+  url_launcher: ^6.1.12
+  stream_transform: ^2.1.0
 
 dev_dependencies:
   flutter_test:
@@ -85,6 +89,7 @@ flutter:
     - assets/icons/
     - assets/images/
     - assets/lottie/
+    - assets/tflite/
     - assets/window/
 
   # An image asset can refer to one or more resolution-specific "variants", see
