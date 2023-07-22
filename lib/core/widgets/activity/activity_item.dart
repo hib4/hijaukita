@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import '../../../../../core/gen/assets.gen.dart';
 import '../../../../../core/route/navigator.dart';
 import '../../../../../core/widgets/text/gradient_text.dart';
+import '../../../features/activity/presentation/pages/activity/activity_page.dart';
 
 class ActivityItem extends StatelessWidget {
   const ActivityItem({super.key, required this.activity});
@@ -15,7 +16,9 @@ class ActivityItem extends StatelessWidget {
     final textTheme = Theme.of(context).textTheme;
 
     return GestureDetector(
-      onTap: () {},
+      onTap: () {
+        navigatorPush(context, ActivityPage(id: activity.id));
+      },
       child: IntrinsicHeight(
         child: Row(
           mainAxisSize: MainAxisSize.max,
