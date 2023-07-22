@@ -20,6 +20,9 @@ import 'features/chat/presentation/bloc/chat_bloc.dart';
 import 'features/home/data/data_sources/remote/home_remote_data_source.dart';
 import 'features/home/data/repositories/home_repository.dart';
 import 'features/home/presentation/bloc/home_bloc.dart';
+import 'features/leardboard/data/data_sources/remote/leaderboard_remote_data_source.dart';
+import 'features/leardboard/data/repositories/leaderboard_repository.dart';
+import 'features/leardboard/presentation/bloc/leaderboard_bloc.dart';
 import 'features/profile/data/data_sources/remote/profile_remote_data_source.dart';
 import 'features/profile/data/repositories/profile_repository.dart';
 import 'features/profile/presentation/bloc/profile_bloc.dart';
@@ -41,6 +44,8 @@ Future<void> initializeServiceLocator() async {
 
   /// Feature - Chat
   _initializeChatFeature();
+
+  _initializeLeaderboardFeature();
 
   /// Feature - Profile
   _initializeProfileFeature();
@@ -183,6 +188,11 @@ void _initializeChatFeature() {
   );
 }
 
+void _initializeLeaderboardFeature(){
+  // bloc
+  sl.registerFactory(
+        () => LeaderboardBloc(
+
 void _initializeProfileFeature() {
   // bloc
   sl.registerFactory(
@@ -207,6 +217,8 @@ void _initializeActivityFeature() {
   );
 
   // data sources
+  sl.registerLazySingleton<LeaderboardRemoteDataSource>(
+        () => LeaderboardRemoteDataSourceImpl(
   sl.registerLazySingleton<ProfileRemoteDataSource>(
     () => ProfileRemoteDataSourceImpl(
       client: sl(),
@@ -226,6 +238,8 @@ void _initializeActivityFeature() {
   );
 
   // repository
+  sl.registerLazySingleton<LeaderboardRepository>(
+        () => LeaderboardRepositoryImpl(
   sl.registerLazySingleton<ProfileRepository>(
     () => ProfileRepositoryImpl(
       localStorage: sl(),
