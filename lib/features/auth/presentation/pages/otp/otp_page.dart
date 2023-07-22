@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:hijaukita/core/widgets/bottom_navigation/bottom_navigation.dart';
 import 'package:hijaukita/core/widgets/snackbar/snackbar_item.dart';
 import 'package:hijaukita/features/home/presentation/pages/home_page.dart';
 
@@ -44,7 +45,7 @@ class _OtpPageState extends State<OtpPage> {
               BlocConsumer<OtpBloc, OtpState>(
                 listener: (context, state) {
                   if (state is OtpSuccess) {
-                    navigatorPushAndRemove(context, const HomePage());
+                    navigatorPushAndRemove(context, const BottomNavigation());
                   } else if (state is OtpFailure) {
                     showSnackBar(context, title: state.message);
                   }

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:hijaukita/core/widgets/bottom_navigation/bottom_navigation.dart';
 import 'package:hijaukita/features/auth/presentation/pages/login/login_page.dart';
 import 'package:hijaukita/features/home/presentation/pages/home_page.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -27,7 +28,7 @@ class _AuthenticationPageState extends State<AuthenticationPage> {
           const LoginPage(),
         );
       } else {
-        navigatorPushAndRemove(context, const HomePage());
+        navigatorPushAndRemove(context, const BottomNavigation());
       }
     });
   }
