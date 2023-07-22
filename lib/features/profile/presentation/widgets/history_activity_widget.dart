@@ -13,6 +13,8 @@ Widget historyActivity(BuildContext context) {
       itemBuilder: (context, index) {
         return Container(
           margin: const EdgeInsets.only(bottom: 16),
+          child: activityItem(context, 'Consume mindfully', 'a',
+              'Mengurangi sampah plastik', '+ 100'),
         );
       },
     ),

@@ -1,9 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:hijaukita/features/profile/presentation/widgets/redeem_point_dialog.dart';
+import '../../../../core/gen/assets.gen.dart';
 import '../../../../core/theme/color_values.dart';
 import '../../domain/entities/profile.dart';
 import '../widgets/item/card_dampak_widget.dart';
 import '../widgets/point_widget.dart';
+
+List badges = [
+  Assets.reward.earthAdvocate.svg(),
+  Assets.reward.ecoSavior.svg(),
+  Assets.reward.greenGuardian.svg(),
+  Assets.reward.greenNnovator.svg(),
+  Assets.reward.planetProtector.svg(),
+];
 
 class ImpactPage extends StatefulWidget {
   const ImpactPage({
@@ -32,15 +41,15 @@ class _ImpactPageState extends State<ImpactPage> {
         children: [
           Padding(
             padding: const EdgeInsets.fromLTRB(0, 24, 0, 0),
-            child: PointCard(() {
+            child: PointWidget(() {
               showDialog(
                 context: context,
                 builder: (_) => RedeemPointDialog(
-                  badges: widget.myBadges,
+                  badges: badges,
                   point: widget.point,
                 ),
               );
-            }, context, widget.myBadges),
+            }, context, badges),
           ),
           const SizedBox(height: 36),
           const Divider(thickness: 16, color: ColorValues.grey01),

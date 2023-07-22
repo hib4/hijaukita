@@ -2,6 +2,8 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hijaukita/core/pages/failure/failure_page.dart';
+import 'package:hijaukita/core/route/navigator.dart';
+import 'package:hijaukita/features/profile/presentation/pages/settings/settings.dart';
 import '../../../../core/gen/assets.gen.dart';
 import '../../../../core/theme/color_values.dart';
 import '../../../../injection_container.dart';
@@ -107,7 +109,9 @@ class _ProfilePageState extends State<ProfilePage>
                               ),
                               const Spacer(),
                               GestureDetector(
-                                onTap: () {},
+                                onTap: () {
+                                  navigatorPush(context, const SettingsPage());
+                                },
                                 child: Assets.icons.settings.svg(
                                   alignment: Alignment.topRight,
                                   width: 24,
