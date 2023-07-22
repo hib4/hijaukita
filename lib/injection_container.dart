@@ -14,12 +14,18 @@ import 'features/auth/data/repositories/register_repository.dart';
 import 'features/auth/presentation/bloc/login/login_bloc.dart';
 import 'features/auth/presentation/bloc/otp/otp_bloc.dart';
 import 'features/auth/presentation/bloc/register/register_bloc.dart';
+import 'features/home/data/data_sources/remote/home_remote_data_source.dart';
+import 'features/home/data/repositories/home_repository.dart';
+import 'features/home/presentation/bloc/home_bloc.dart';
 
 final sl = GetIt.I;
 
 Future<void> initializeServiceLocator() async {
-  /// Feature - Login
-  _initializeLoginFeature();
+  /// Feature - Authentication
+  _initializeAuthenticationFeature();
+
+  /// Feature - Home
+  _initializeHomeFeature();
 
   /// Core
   sl.registerLazySingleton<NetworkInfo>(
@@ -42,7 +48,7 @@ Future<void> initializeServiceLocator() async {
   sl.registerLazySingleton(() => InternetConnectionChecker());
 }
 
-void _initializeLoginFeature() {
+void _initializeAuthenticationFeature() {
   // bloc
   sl.registerFactory(
     () => LoginBloc(
@@ -100,6 +106,31 @@ void _initializeLoginFeature() {
 
   sl.registerLazySingleton<OtpRepository>(
     () => OtpRepositoryImpl(
+      remoteDataSource: sl(),
+      localStorage: sl(),
+      networkInfo: sl(),
+    ),
+  );
+}
+
+void _initializeHomeFeature() {
+  // bloc
+  sl.registerFactory(
+    () => HomeBloc(
+      repository: sl(),
+    ),
+  );
+
+  // data sources
+  sl.registerLazySingleton<HomeRemoteDataSource>(
+    () => HomeRemoteDataSourceImpl(
+      client: sl(),
+    ),
+  );
+
+  // repository
+  sl.registerLazySingleton<HomeRepository>(
+    () => HomeRepositoryImpl(
       remoteDataSource: sl(),
       localStorage: sl(),
       networkInfo: sl(),
