@@ -7,7 +7,6 @@ import 'core/bloc/observer/app_bloc_observer.dart';
 import 'core/bloc/provider/provider.dart';
 import 'core/theme/app_style.dart';
 import 'core/theme/app_theme_data.dart';
-import 'features/on_boarding/presentation/pages/on_boarding_page.dart';
 import 'injection_container.dart';
 
 void main() async {

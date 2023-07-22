@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '../../../features/home/presentation/pages/home_page.dart';
+import '../../../features/profile/presentation/pages/profile_page.dart';
 import '../../gen/assets.gen.dart';
 import '../../theme/color_values.dart';
 
@@ -19,7 +20,7 @@ class _BottomNavigationState extends State<BottomNavigation> {
     const HomePage(),
     const SizedBox(),
     const SizedBox(),
-    const SizedBox(),
+    const ProfilePage(),
   ];
 
   final _items = [
