@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:hijaukita/features/chat/presentation/pages/chat_page.dart';
 
 import '../../../../core/gen/assets.gen.dart';
 import '../../../../core/route/navigator.dart';
@@ -40,7 +41,9 @@ class ConsultationWidget extends StatelessWidget {
                 ),
                 const SizedBox(height: 4),
                 ElevatedButton(
-                  onPressed: () {},
+                  onPressed: () {
+                    navigatorPush(context, ChatPage());
+                  },
                   style: ElevatedButton.styleFrom(
                     minimumSize: const Size(92, 32),
                     textStyle: textTheme.titleSmall!.copyWith(

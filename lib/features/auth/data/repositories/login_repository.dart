@@ -49,7 +49,7 @@ class LoginRepositoryImpl implements LoginRepository {
     if (await networkInfo.isConnected) {
       try {
         final token = await remoteDataSource.googleLogin(idToken);
-        // await localStorage.setTokenString(cachedBearerToken, token);
+        await localStorage.setTokenString(cachedBearerToken, token);
         return const Right(null);
       } on ServerException {
         return Left(ServerFailure());
