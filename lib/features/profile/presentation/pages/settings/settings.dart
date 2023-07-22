@@ -1,7 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:hijaukita/features/auth/presentation/pages/login/login_page.dart';
+import 'package:hijaukita/features/profile/presentation/bloc/logout_bloc.dart';
+import 'package:hijaukita/features/profile/presentation/bloc/logout_state.dart';
 
 import '../../../../../core/route/navigator.dart';
 import '../../../../../core/theme/color_values.dart';
+import '../../../../../core/widgets/snackbar/snackbar_item.dart';
+import '../../bloc/logout_event.dart';
 import '../../widgets/item_settings/list_settings.dart';
 import 'item/detail_settings.dart';
 
@@ -28,7 +34,23 @@ class _SettingsPageState extends State<SettingsPage> {
               navigatorPush(context, const DetailSettings());
             },),
             const SizedBox(height: 10,),
-            listMenu(context, "Keluar",  const Icon(Icons.logout, color: Colors.red,), ColorValues.black01, onTap: () {},)
+            BlocConsumer<LogoutBloc, LogoutState>(
+              listener: (context, state) {
+                if(state is LogoutSuccess) {
+                  navigatorPushAndRemove(context, const LoginPage());
+                } else if (state is LogoutFailure) {
+                  showSnackBar(context, title: state.message);
+                }
+              },
+              builder: (context, state) {
+                if(state is LogoutLoading) {
+                  return const Center(child: CircularProgressIndicator(),);
+                }
+                return listMenu(context, "Keluar",  const Icon(Icons.logout, color: Colors.red,), ColorValues.black01, onTap: () {
+                  context.read<LogoutBloc>().add(allLogoutEvent());
+                },);
+              },
+            )
           ],
         ),
       ),

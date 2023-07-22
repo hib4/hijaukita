@@ -21,7 +21,7 @@ class _DetailSettingsState extends State<DetailSettings> {
         title: const Text('Ubah Profil'),
       ),
       body: Padding(
-        padding: EdgeInsets.all(24),
+        padding: const EdgeInsets.all(24),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [

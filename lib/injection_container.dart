@@ -1,4 +1,5 @@
 import 'package:get_it/get_it.dart';
+import 'package:hijaukita/features/profile/presentation/bloc/logout_bloc.dart';
 import 'package:internet_connection_checker/internet_connection_checker.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:http/http.dart' as http;
@@ -20,6 +21,7 @@ import 'features/chat/presentation/bloc/chat_bloc.dart';
 import 'features/home/data/data_sources/remote/home_remote_data_source.dart';
 import 'features/home/data/repositories/home_repository.dart';
 import 'features/home/presentation/bloc/home_bloc.dart';
+import 'features/profile/data/repositories/logout_repository.dart';
 import 'features/leardboard/data/data_sources/remote/leaderboard_remote_data_source.dart';
 import 'features/leardboard/data/repositories/leaderboard_repository.dart';
 import 'features/leardboard/presentation/bloc/leaderboard_bloc.dart';
@@ -94,6 +96,12 @@ void _initializeAuthenticationFeature() {
     ),
   );
 
+  sl.registerFactory(
+        () => LogoutBloc(
+      repository: sl(),
+    ),
+  );
+
   // data sources
   sl.registerLazySingleton<LoginRemoteDataSource>(
     () => LoginRemoteDataSourceImpl(
@@ -133,6 +141,13 @@ void _initializeAuthenticationFeature() {
   sl.registerLazySingleton<OtpRepository>(
     () => OtpRepositoryImpl(
       remoteDataSource: sl(),
+      localStorage: sl(),
+      networkInfo: sl(),
+    ),
+  );
+
+  sl.registerLazySingleton<LogoutRepository>(
+        () => LogoutRepositoryImpl(
       localStorage: sl(),
       networkInfo: sl(),
     ),

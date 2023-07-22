@@ -1,4 +1,5 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:hijaukita/features/profile/presentation/bloc/logout_bloc.dart';
 
 import '../../../features/auth/presentation/bloc/login/login_bloc.dart';
 import '../../../features/auth/presentation/bloc/otp/otp_bloc.dart';
@@ -28,7 +29,10 @@ class Provider {
       ),
       BlocProvider(
         create: (_) => sl.get<LeaderboardBloc>(),
-      )
+      ),
+      BlocProvider(
+        create: (_) => sl.get<LogoutBloc>(),
+      ),
     ];
   }
 }
