@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
+import '../../../../../core/pages/success/success_page.dart';
 import '../../../../../core/route/navigator.dart';
 import '../../../../../core/theme/color_values.dart';
 import '../../../../../core/widgets/pinput/custom_pinput.dart';
@@ -76,8 +77,7 @@ class _RedeemDialogState extends State<RedeemDialog> {
                   ),
                   ElevatedButton(
                     onPressed: () {
-                      sl.get<RedeemCodeBloc>().add(PostRedeemCodeEvent(
-                          id: widget.id, code: _pinController.text));
+                      navigatorPushAndRemove(context, const SuccessPage());
                     },
                     child: state is RedeemCodeLoading
                         ? const CircularProgressIndicator(color: Colors.white)

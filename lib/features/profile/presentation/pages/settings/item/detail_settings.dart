@@ -13,7 +13,6 @@ class DetailSettings extends StatefulWidget {
 }
 
 class _DetailSettingsState extends State<DetailSettings> {
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -28,7 +27,10 @@ class _DetailSettingsState extends State<DetailSettings> {
             Positioned(
               child: CircleAvatar(
                 radius: 50,
-                backgroundImage: const CachedNetworkImageProvider('https://images.unsplash.com/photo-1438761681033-6461ffad8d80?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8cGVyc29ufGVufDB8fDB8fHww&auto=format&fit=crop&w=500&q=60'),
+                backgroundColor: ColorValues.grey02,
+                backgroundImage: const CachedNetworkImageProvider(
+                  'https://images.unsplash.com/photo-1496302662116-35cc4f36df92?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80',
+                ),
                 child: Stack(
                   alignment: Alignment.topCenter,
                   children: [
@@ -61,17 +63,23 @@ class _DetailSettingsState extends State<DetailSettings> {
                 ),
               ),
             ),
-            const listEditProfile(tittle: 'Nama', name: 'Jane Doe'),
-            const SizedBox(height: 10,),
-            const listEditProfile(tittle: 'Email', name: 'janedoe@gmail.com'),
+            const listEditProfile(
+              tittle: 'Nama',
+              name: 'Hiba Kun',
+            ),
+            const SizedBox(
+              height: 10,
+            ),
+            const listEditProfile(
+              tittle: 'Email',
+              name: 'hibakun8@gmail.com',
+            ),
             const Spacer(),
             ElevatedButton(
-              onPressed: (){
+              onPressed: () {
                 navigatorPop(context);
               },
-              child: const Text(
-                'simpan'
-              ),
+              child: const Text('Simpan'),
             )
           ],
         ),

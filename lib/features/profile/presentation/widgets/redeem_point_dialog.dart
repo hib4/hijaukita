@@ -12,7 +12,7 @@ class RedeemPointDialog extends StatefulWidget {
     required this.point,
   });
 
-  final List<BadgeProfile> badges;
+  final List badges;
   final String point;
 
   @override
@@ -78,13 +78,23 @@ class _RedeemPointDialogState extends State<RedeemPointDialog> {
                     padding: const EdgeInsets.all(8),
                     child: Column(
                       children: [
-                        SvgPicture.network(badge.imageUrl),
+                        badge,
                         const SizedBox(height: 8),
-                        Text(
-                          widget.point,
-                          style: textTheme.titleSmall!.copyWith(
-                            color: Colors.black,
-                          ),
+                        Row(
+                          mainAxisSize: MainAxisSize.min,
+                          children: [
+                            Assets.icons.coin.svg(
+                              width: 16,
+                              height: 16,
+                            ),
+                            const SizedBox(width: 4),
+                            Text(
+                              '100',
+                              style: textTheme.titleSmall!.copyWith(
+                                color: Colors.black,
+                              ),
+                            ),
+                          ],
                         ),
                       ],
                     ),

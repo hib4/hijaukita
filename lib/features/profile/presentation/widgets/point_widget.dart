@@ -1,13 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 
+import '../../../../core/gen/assets.gen.dart';
 import '../../../../core/theme/color_values.dart';
 import '../../domain/entities/profile.dart';
 
-Widget PointCard(
+Widget PointWidget(
   VoidCallback onTap,
   BuildContext context,
-  List<BadgeProfile> badges,
+  List badges,
 ) {
   final textTheme = Theme.of(context).textTheme;
   return Padding(
@@ -33,10 +34,10 @@ Widget PointCard(
           const SizedBox(height: 16),
           Wrap(
             children: [
-              for (var badge in badges)
+              for (int i = 0; i < 2; i++)
                 Container(
                   padding: const EdgeInsets.all(8),
-                  child: SvgPicture.network(badge.imageUrl),
+                  child: badges[i],
                 ),
             ],
           ),

@@ -108,13 +108,16 @@ class $AssetsImagesGen {
   SvgGenImage get personZoom =>
       const SvgGenImage('assets/images/person_zoom.svg');
 
+  /// File path: assets/images/trash.jpg
+  AssetGenImage get trash => const AssetGenImage('assets/images/trash.jpg');
+
   /// File path: assets/images/woman_globe.svg
   SvgGenImage get womanGlobe =>
       const SvgGenImage('assets/images/woman_globe.svg');
 
   /// List of all assets
-  List<SvgGenImage> get values =>
-      [birdBottle, earth, globe, personSuccess, personZoom, womanGlobe];
+  List<dynamic> get values =>
+      [birdBottle, earth, globe, personSuccess, personZoom, trash, womanGlobe];
 }
 
 class $AssetsLottieGen {
@@ -126,6 +129,34 @@ class $AssetsLottieGen {
 
   /// List of all assets
   List<LottieGenImage> get values => [typing];
+}
+
+class $AssetsRewardGen {
+  const $AssetsRewardGen();
+
+  /// File path: assets/reward/earth-advocate.svg
+  SvgGenImage get earthAdvocate =>
+      const SvgGenImage('assets/reward/earth-advocate.svg');
+
+  /// File path: assets/reward/eco-savior.svg
+  SvgGenImage get ecoSavior =>
+      const SvgGenImage('assets/reward/eco-savior.svg');
+
+  /// File path: assets/reward/green-guardian.svg
+  SvgGenImage get greenGuardian =>
+      const SvgGenImage('assets/reward/green-guardian.svg');
+
+  /// File path: assets/reward/green-nnovator.svg
+  SvgGenImage get greenNnovator =>
+      const SvgGenImage('assets/reward/green-nnovator.svg');
+
+  /// File path: assets/reward/planet-protector.svg
+  SvgGenImage get planetProtector =>
+      const SvgGenImage('assets/reward/planet-protector.svg');
+
+  /// List of all assets
+  List<SvgGenImage> get values =>
+      [earthAdvocate, ecoSavior, greenGuardian, greenNnovator, planetProtector];
 }
 
 class $AssetsTfliteGen {
@@ -180,6 +211,7 @@ class Assets {
   static const $AssetsIconsGen icons = $AssetsIconsGen();
   static const $AssetsImagesGen images = $AssetsImagesGen();
   static const $AssetsLottieGen lottie = $AssetsLottieGen();
+  static const $AssetsRewardGen reward = $AssetsRewardGen();
   static const $AssetsTfliteGen tflite = $AssetsTfliteGen();
   static const $AssetsWindowGen window = $AssetsWindowGen();
 }
