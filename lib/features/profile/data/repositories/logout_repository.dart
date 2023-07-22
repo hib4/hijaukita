@@ -1,4 +1,5 @@
 import 'package:dartz/dartz.dart';
+import 'package:google_sign_in/google_sign_in.dart';
 
 import '../../../../../core/constant/constant.dart';
 import '../../../../../core/error/exceptions.dart';
@@ -22,9 +23,15 @@ class LogoutRepositoryImpl implements LogoutRepository {
   @override
   Future<Either<Failure, void>> logout() async {
     try {
+      await GoogleSignIn().signOut();
       await localStorage.removeToken(cachedBearerToken);
-      await
       return const Right(null);
+    } on CacheException {
+      return Left(CacheFailure());
+    } on ServerException {
+      return Left(ServerFailure());
+    } on TimeOutException {
+      return Left(TimeOutFailure());
     }
   }
 }
