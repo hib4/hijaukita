@@ -14,14 +14,14 @@ class Home {
   });
 
   factory Home.fromJson(Map<String, dynamic> json) => Home(
-    message: json["message"],
-    data: Data.fromJson(json["data"]),
-  );
+        message: json["message"],
+        data: Data.fromJson(json["data"]),
+      );
 
   Map<String, dynamic> toJson() => {
-    "message": message,
-    "data": data.toJson(),
-  };
+        "message": message,
+        "data": data.toJson(),
+      };
 }
 
 class Data {
@@ -34,14 +34,15 @@ class Data {
   });
 
   factory Data.fromJson(Map<String, dynamic> json) => Data(
-    user: User.fromJson(json["user"]),
-    wishlist: List<Wishlist>.from(json["wishlist"].map((x) => Wishlist.fromJson(x))),
-  );
+        user: User.fromJson(json["user"]),
+        wishlist: List<Wishlist>.from(
+            json["wishlist"].map((x) => Wishlist.fromJson(x))),
+      );
 
   Map<String, dynamic> toJson() => {
-    "user": user.toJson(),
-    "wishlist": List<dynamic>.from(wishlist.map((x) => x.toJson())),
-  };
+        "user": user.toJson(),
+        "wishlist": List<dynamic>.from(wishlist.map((x) => x.toJson())),
+      };
 }
 
 class User {
@@ -60,20 +61,20 @@ class User {
   });
 
   factory User.fromJson(Map<String, dynamic> json) => User(
-    id: json["id"],
-    name: json["name"],
-    email: json["email"],
-    point: json["point"],
-    avatarUrl: json["avatar_url"],
-  );
+        id: json["id"],
+        name: json["name"],
+        email: json["email"],
+        point: json["point"],
+        avatarUrl: json["avatar_url"],
+      );
 
   Map<String, dynamic> toJson() => {
-    "id": id,
-    "name": name,
-    "email": email,
-    "point": point,
-    "avatar_url": avatarUrl,
-  };
+        "id": id,
+        "name": name,
+        "email": email,
+        "point": point,
+        "avatar_url": avatarUrl,
+      };
 }
 
 class Wishlist {
@@ -104,32 +105,32 @@ class Wishlist {
   });
 
   factory Wishlist.fromJson(Map<String, dynamic> json) => Wishlist(
-    id: json["id"],
-    subCategoryId: json["sub_category_id"],
-    name: json["name"],
-    description: json["description"],
-    label: json["label"],
-    reward: json["reward"],
-    activityType: json["activity_type"],
-    imageUrl: json["image_url"],
-    isDone: json["is_done"],
-    isWishlist: json["is_wishlist"],
-    subCategory: SubCategory.fromJson(json["sub_category"]),
-  );
+        id: json["id"],
+        subCategoryId: json["sub_category_id"],
+        name: json["name"],
+        description: json["description"],
+        label: json["label"],
+        reward: json["reward"],
+        activityType: json["activity_type"],
+        imageUrl: json["image_url"],
+        isDone: json["is_done"],
+        isWishlist: json["is_wishlist"],
+        subCategory: SubCategory.fromJson(json["sub_category"]),
+      );
 
   Map<String, dynamic> toJson() => {
-    "id": id,
-    "sub_category_id": subCategoryId,
-    "name": name,
-    "description": description,
-    "label": label,
-    "reward": reward,
-    "activity_type": activityType,
-    "image_url": imageUrl,
-    "is_done": isDone,
-    "is_wishlist": isWishlist,
-    "sub_category": subCategory.toJson(),
-  };
+        "id": id,
+        "sub_category_id": subCategoryId,
+        "name": name,
+        "description": description,
+        "label": label,
+        "reward": reward,
+        "activity_type": activityType,
+        "image_url": imageUrl,
+        "is_done": isDone,
+        "is_wishlist": isWishlist,
+        "sub_category": subCategory.toJson(),
+      };
 }
 
 class SubCategory {
@@ -144,16 +145,17 @@ class SubCategory {
   });
 
   factory SubCategory.fromJson(Map<String, dynamic> json) => SubCategory(
-    categoryId: json["category_id"],
-    name: json["name"],
-    susdevGoals: List<SusdevGoal>.from(json["susdev_goals"].map((x) => SusdevGoal.fromJson(x))),
-  );
+        categoryId: json["category_id"],
+        name: json["name"],
+        susdevGoals: List<SusdevGoal>.from(
+            json["susdev_goals"].map((x) => SusdevGoal.fromJson(x))),
+      );
 
   Map<String, dynamic> toJson() => {
-    "category_id": categoryId,
-    "name": name,
-    "susdev_goals": List<dynamic>.from(susdevGoals.map((x) => x.toJson())),
-  };
+        "category_id": categoryId,
+        "name": name,
+        "susdev_goals": List<dynamic>.from(susdevGoals.map((x) => x.toJson())),
+      };
 }
 
 class SusdevGoal {
@@ -166,12 +168,12 @@ class SusdevGoal {
   });
 
   factory SusdevGoal.fromJson(Map<String, dynamic> json) => SusdevGoal(
-    name: json["name"],
-    imageUrl: json["image_url"],
-  );
+        name: json["name"],
+        imageUrl: json["image_url"],
+      );
 
   Map<String, dynamic> toJson() => {
-    "name": name,
-    "image_url": imageUrl,
-  };
+        "name": name,
+        "image_url": imageUrl,
+      };
 }

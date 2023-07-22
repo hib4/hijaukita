@@ -20,6 +20,9 @@ import 'features/chat/presentation/bloc/chat_bloc.dart';
 import 'features/home/data/data_sources/remote/home_remote_data_source.dart';
 import 'features/home/data/repositories/home_repository.dart';
 import 'features/home/presentation/bloc/home_bloc.dart';
+import 'features/profile/data/data_sources/remote/profile_remote_data_source.dart';
+import 'features/profile/data/repositories/profile_repository.dart';
+import 'features/profile/presentation/bloc/profile_bloc.dart';
 import 'features/quiz/data/data_sources/remote/quiz_detail_activity_data_source.dart';
 import 'features/quiz/data/data_sources/remote/quiz_main_activity.dart';
 import 'features/quiz/data/repositories/quiz_detail_activity_respository.dart';
@@ -39,6 +42,9 @@ Future<void> initializeServiceLocator() async {
   /// Feature - Chat
   _initializeChatFeature();
 
+  /// Feature - Profile
+  _initializeProfileFeature();
+  
   /// Feature - Activity
   _initializeActivityFeature();
 
@@ -177,6 +183,11 @@ void _initializeChatFeature() {
   );
 }
 
+void _initializeProfileFeature() {
+  // bloc
+  sl.registerFactory(
+    () => ProfileBloc(
+      
 void _initializeActivityFeature() {
   // bloc
   sl.registerFactory(
@@ -192,6 +203,9 @@ void _initializeActivityFeature() {
   );
 
   // data sources
+  sl.registerLazySingleton<ProfileRemoteDataSource>(
+    () => ProfileRemoteDataSourceImpl(
+
   sl.registerLazySingleton<QuizDetailActivityRemoteDataSource>(
         () => QuizDetailActivityRemoteDataSourceImpl(
       client: sl(),
@@ -205,6 +219,9 @@ void _initializeActivityFeature() {
   );
 
   // repository
+  sl.registerLazySingleton<ProfileRepository>(
+    () => ProfileRepositoryImpl(
+
   sl.registerLazySingleton<QuizDetailActivityRepository>(
         () => QuizDetailActivityRepositoryImpl(
       remoteDataSource: sl(),
