@@ -33,6 +33,22 @@ import 'features/auth/presentation/bloc/register/register_bloc.dart';
 import 'features/chat/data/data_sources/remote/chat_remote_data_source.dart';
 import 'features/chat/data/repositories/chat_repository.dart';
 import 'features/chat/presentation/bloc/chat_bloc.dart';
+import 'features/discover/data/data_sources/local/discover_cache.dart';
+import 'features/discover/data/data_sources/remote/detail_category_remote_data_source.dart';
+import 'features/discover/data/data_sources/remote/discover_remote_data_source.dart';
+import 'features/discover/data/data_sources/remote/more_activity_remote_data_source.dart';
+import 'features/discover/data/data_sources/remote/more_category_remote_data_source.dart';
+import 'features/discover/data/data_sources/remote/more_event_remote_data_source.dart';
+import 'features/discover/data/repositories/detail_category_repository.dart';
+import 'features/discover/data/repositories/discover_repository.dart';
+import 'features/discover/data/repositories/more_activity_repository.dart';
+import 'features/discover/data/repositories/more_category_repository.dart';
+import 'features/discover/data/repositories/more_event_repository.dart';
+import 'features/discover/presentation/bloc/detail_category/detail_category_bloc.dart';
+import 'features/discover/presentation/bloc/discover/discover_bloc.dart';
+import 'features/discover/presentation/bloc/more_activity/more_activity_bloc.dart';
+import 'features/discover/presentation/bloc/more_category/more_category_bloc.dart';
+import 'features/discover/presentation/bloc/more_event/more_event_bloc.dart';
 import 'features/home/data/data_sources/remote/home_remote_data_source.dart';
 import 'features/home/data/repositories/home_repository.dart';
 import 'features/home/presentation/bloc/home_bloc.dart';
@@ -62,6 +78,10 @@ Future<void> initializeServiceLocator() async {
   /// Feature - Chat
   _initializeChatFeature();
 
+  /// Feature - Discover
+  _initializeDiscoverFeature();
+
+  /// Feature - Leaderboard
   _initializeLeaderboardFeature();
 
   /// Feature - Profile
@@ -402,6 +422,116 @@ void _initializeActivityFeature() {
 
   sl.registerLazySingleton<RedeemCodeRepository>(
     () => RedeemCodeRepositoryImpl(
+      remoteDataSource: sl(),
+      localStorage: sl(),
+      networkInfo: sl(),
+    ),
+  );
+}
+
+void _initializeDiscoverFeature() {
+  // bloc
+  sl.registerFactory(
+    () => DiscoverBloc(
+      repository: sl(),
+    ),
+  );
+
+  sl.registerFactory(
+    () => MoreEventBloc(
+      repository: sl(),
+    ),
+  );
+
+  sl.registerFactory(
+    () => MoreCategoryBloc(
+      repository: sl(),
+    ),
+  );
+
+  sl.registerFactory(
+    () => MoreActivityBloc(
+      repository: sl(),
+    ),
+  );
+
+  sl.registerFactory(
+    () => DetailCategoryBloc(
+      repository: sl(),
+    ),
+  );
+
+  // data sources
+  sl.registerLazySingleton<DiscoverRemoteDataSource>(
+    () => DiscoverRemoteDataSourceImpl(
+      client: sl(),
+    ),
+  );
+
+  sl.registerLazySingleton<DiscoverCache>(
+    () => DiscoverCache(),
+  );
+
+  sl.registerLazySingleton<MoreEventRemoteDataSource>(
+    () => MoreEventRemoteDataSourceImpl(
+      client: sl(),
+    ),
+  );
+
+  sl.registerLazySingleton<MoreCategoryRemoteDataSource>(
+    () => MoreCategoryRemoteDataSourceImpl(
+      client: sl(),
+    ),
+  );
+
+  sl.registerLazySingleton<MoreActivityRemoteDataSource>(
+    () => MoreActivityRemoteDataSourceImpl(
+      client: sl(),
+    ),
+  );
+
+  sl.registerLazySingleton<DetailCategoryRemoteDataSource>(
+    () => DetailCategoryRemoteDataSourceImpl(
+      client: sl(),
+    ),
+  );
+
+  // repository
+  sl.registerLazySingleton<DiscoverRepository>(
+    () => DiscoverRepositoryImpl(
+      remoteDataSource: sl(),
+      localStorage: sl(),
+      cache: sl(),
+      networkInfo: sl(),
+    ),
+  );
+
+  sl.registerLazySingleton<MoreEventRepository>(
+    () => MoreEventRepositoryImpl(
+      remoteDataSource: sl(),
+      localStorage: sl(),
+      networkInfo: sl(),
+    ),
+  );
+
+  sl.registerLazySingleton<MoreCategoryRepository>(
+    () => MoreCategoryRepositoryImpl(
+      remoteDataSource: sl(),
+      localStorage: sl(),
+      networkInfo: sl(),
+    ),
+  );
+
+  sl.registerLazySingleton<MoreActivityRepository>(
+    () => MoreActivityRepositoryImpl(
+      remoteDataSource: sl(),
+      localStorage: sl(),
+      networkInfo: sl(),
+    ),
+  );
+
+  sl.registerLazySingleton<DetailCategoryRepository>(
+    () => DetailCategoryRepositoryImpl(
       remoteDataSource: sl(),
       localStorage: sl(),
       networkInfo: sl(),

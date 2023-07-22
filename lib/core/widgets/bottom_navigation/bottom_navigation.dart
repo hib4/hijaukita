@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:hijaukita/features/leardboard/presentation/pages/leaderboard.dart';
 
+import '../../../features/discover/presentation/pages/discover_page.dart';
 import '../../../features/home/presentation/pages/home_page.dart';
+import '../../../features/leardboard/presentation/pages/leaderboard.dart';
 import '../../../features/profile/presentation/pages/profile_page.dart';
 import '../../gen/assets.gen.dart';
 import '../../theme/color_values.dart';
@@ -19,7 +20,7 @@ class _BottomNavigationState extends State<BottomNavigation> {
 
   final _tabs = [
     const HomePage(),
-    const SizedBox(),
+    const DiscoverPage(),
     const LeaderboardPage(),
     const ProfilePage(),
   ];
