@@ -20,6 +20,9 @@ import 'features/chat/presentation/bloc/chat_bloc.dart';
 import 'features/home/data/data_sources/remote/home_remote_data_source.dart';
 import 'features/home/data/repositories/home_repository.dart';
 import 'features/home/presentation/bloc/home_bloc.dart';
+import 'features/profile/data/data_sources/remote/profile_remote_data_source.dart';
+import 'features/profile/data/repositories/profile_repository.dart';
+import 'features/profile/presentation/bloc/profile_bloc.dart';
 
 final sl = GetIt.I;
 
@@ -32,6 +35,9 @@ Future<void> initializeServiceLocator() async {
 
   /// Feature - Chat
   _initializeChatFeature();
+
+  /// Feature - Profile
+  _initializeProfileFeature();
 
   /// Core
   sl.registerLazySingleton<NetworkInfo>(
@@ -163,6 +169,31 @@ void _initializeChatFeature() {
   sl.registerLazySingleton<ChatRepository>(
     () => ChatRepositoryImpl(
       remoteDataSource: sl(),
+      networkInfo: sl(),
+    ),
+  );
+}
+
+void _initializeProfileFeature() {
+  // bloc
+  sl.registerFactory(
+    () => ProfileBloc(
+      repository: sl(),
+    ),
+  );
+
+  // data sources
+  sl.registerLazySingleton<ProfileRemoteDataSource>(
+    () => ProfileRemoteDataSourceImpl(
+      client: sl(),
+    ),
+  );
+
+  // repository
+  sl.registerLazySingleton<ProfileRepository>(
+    () => ProfileRepositoryImpl(
+      remoteDataSource: sl(),
+      localStorage: sl(),
       networkInfo: sl(),
     ),
   );

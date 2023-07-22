@@ -57,6 +57,9 @@ class LoginRemoteDataSourceImpl implements LoginRemoteDataSource {
           onTimeout: () => throw const TimeOutException(),
         );
 
+    print(response.statusCode);
+    print(response.body);
+
     if (response.statusCode == 200) {
       final data = jsonDecode(response.body);
       return data['passport_token'];
