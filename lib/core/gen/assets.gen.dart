@@ -32,8 +32,15 @@ class $AssetsIconsGen {
   /// File path: assets/icons/eye_hide.svg
   SvgGenImage get eyeHide => const SvgGenImage('assets/icons/eye_hide.svg');
 
+  /// File path: assets/icons/google.svg
+  SvgGenImage get google => const SvgGenImage('assets/icons/google.svg');
+
+  /// File path: assets/icons/logo.svg
+  SvgGenImage get logo => const SvgGenImage('assets/icons/logo.svg');
+
   /// List of all assets
-  List<SvgGenImage> get values => [arrow, bell, coin, discover, eye, eyeHide];
+  List<SvgGenImage> get values =>
+      [arrow, bell, coin, discover, eye, eyeHide, google, logo];
 }
 
 class $AssetsImagesGen {
