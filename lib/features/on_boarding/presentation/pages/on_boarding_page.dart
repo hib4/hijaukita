@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:hijaukita/core/route/navigator.dart';
 import 'package:hijaukita/core/theme/color_values.dart';
+import 'package:hijaukita/features/auth/presentation/pages/login/login_page.dart';
 import 'package:hijaukita/features/on_boarding/presentation/widgets/on_boarding_widget.dart';
 
 import '../../../../core/gen/assets.gen.dart';
@@ -116,7 +118,9 @@ class _OnBoardingPageState extends State<OnBoardingPage> {
                       Padding(
                         padding: const EdgeInsets.all(24),
                         child: ElevatedButton(
-                          onPressed: () {},
+                          onPressed: () {
+                            navigatorPushAndRemove(context, const LoginPage());
+                          },
                           child: const Text('Mulai Sekarang'),
                         ),
                       ),
