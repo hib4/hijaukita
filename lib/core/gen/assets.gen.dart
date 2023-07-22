@@ -35,12 +35,55 @@ class $AssetsIconsGen {
   /// File path: assets/icons/google.svg
   SvgGenImage get google => const SvgGenImage('assets/icons/google.svg');
 
+  /// File path: assets/icons/home.svg
+  SvgGenImage get home => const SvgGenImage('assets/icons/home.svg');
+
+  /// File path: assets/icons/information.svg
+  SvgGenImage get information =>
+      const SvgGenImage('assets/icons/information.svg');
+
+  /// File path: assets/icons/leaderboard.svg
+  SvgGenImage get leaderboard =>
+      const SvgGenImage('assets/icons/leaderboard.svg');
+
+  /// File path: assets/icons/location.svg
+  SvgGenImage get location => const SvgGenImage('assets/icons/location.svg');
+
   /// File path: assets/icons/logo.svg
   SvgGenImage get logo => const SvgGenImage('assets/icons/logo.svg');
 
+  /// File path: assets/icons/profile.svg
+  SvgGenImage get profile => const SvgGenImage('assets/icons/profile.svg');
+
+  /// File path: assets/icons/search.svg
+  SvgGenImage get search => const SvgGenImage('assets/icons/search.svg');
+
+  /// File path: assets/icons/settings.svg
+  SvgGenImage get settings => const SvgGenImage('assets/icons/settings.svg');
+
+  /// File path: assets/icons/upload_photo.svg
+  SvgGenImage get uploadPhoto =>
+      const SvgGenImage('assets/icons/upload_photo.svg');
+
   /// List of all assets
-  List<SvgGenImage> get values =>
-      [arrow, bell, coin, discover, eye, eyeHide, google, logo];
+  List<SvgGenImage> get values => [
+        arrow,
+        bell,
+        coin,
+        discover,
+        eye,
+        eyeHide,
+        google,
+        home,
+        information,
+        leaderboard,
+        location,
+        logo,
+        profile,
+        search,
+        settings,
+        uploadPhoto
+      ];
 }
 
 class $AssetsImagesGen {
@@ -56,8 +99,53 @@ class $AssetsImagesGen {
   /// File path: assets/images/globe.svg
   SvgGenImage get globe => const SvgGenImage('assets/images/globe.svg');
 
+  /// File path: assets/images/person_success.svg
+  SvgGenImage get personSuccess =>
+      const SvgGenImage('assets/images/person_success.svg');
+
+  /// File path: assets/images/person_zoom.svg
+  SvgGenImage get personZoom =>
+      const SvgGenImage('assets/images/person_zoom.svg');
+
+  /// File path: assets/images/woman_globe.svg
+  SvgGenImage get womanGlobe =>
+      const SvgGenImage('assets/images/woman_globe.svg');
+
   /// List of all assets
-  List<SvgGenImage> get values => [birdBottle, earth, globe];
+  List<SvgGenImage> get values =>
+      [birdBottle, earth, globe, personSuccess, personZoom, womanGlobe];
+}
+
+class $AssetsWindowGen {
+  const $AssetsWindowGen();
+
+  /// File path: assets/window/background.svg
+  SvgGenImage get background =>
+      const SvgGenImage('assets/window/background.svg');
+
+  /// File path: assets/window/bottle.svg
+  SvgGenImage get bottle => const SvgGenImage('assets/window/bottle.svg');
+
+  /// File path: assets/window/paper.svg
+  SvgGenImage get paper => const SvgGenImage('assets/window/paper.svg');
+
+  /// File path: assets/window/small_paper.svg
+  SvgGenImage get smallPaper =>
+      const SvgGenImage('assets/window/small_paper.svg');
+
+  /// File path: assets/window/trash.svg
+  SvgGenImage get trash => const SvgGenImage('assets/window/trash.svg');
+
+  /// File path: assets/window/wave.svg
+  SvgGenImage get wave => const SvgGenImage('assets/window/wave.svg');
+
+  /// File path: assets/window/wave_bottle.svg
+  SvgGenImage get waveBottle =>
+      const SvgGenImage('assets/window/wave_bottle.svg');
+
+  /// List of all assets
+  List<SvgGenImage> get values =>
+      [background, bottle, paper, smallPaper, trash, wave, waveBottle];
 }
 
 class Assets {
@@ -65,6 +153,7 @@ class Assets {
 
   static const $AssetsIconsGen icons = $AssetsIconsGen();
   static const $AssetsImagesGen images = $AssetsImagesGen();
+  static const $AssetsWindowGen window = $AssetsWindowGen();
 }
 
 class AssetGenImage {
